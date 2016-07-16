@@ -37,6 +37,10 @@ function getArtist(){
   selected = artists[0].firstname + " "+ artists[0].lastname;
   return selected;
 }
+function convertArtist(){
+  var dash = "_";
+}
+
 
 var guessArtist = {
   dashes:[],
