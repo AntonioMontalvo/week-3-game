@@ -12,3 +12,13 @@ p{
   margin-bottom: 40px;
   text-align: center;
 }
+input {
+border: 2px solid green;
+margin: 43px ;
+margin-left: 50px
+text-align: center;
+}
+.subhead{
+  display: table;
+  margin: 0 auto;
+}
