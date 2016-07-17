@@ -37,7 +37,9 @@ var guessArtist = {
   firstname:[],
   lastname: [],
   display: function(){
-    console.log(this.firstname + " "+this.lastname);
+    var targetP = document.getElementById("guess-text");
+	 targetP.innerHTML = this.firstname + " " + this.lastname;
+   console.log(this.firstname + " "+this.lastname);
   }
 }
 
@@ -65,6 +67,7 @@ function convertLast(){
     console.log (guessLast);
   }
 }
+
 
 //replace artist name for dashes
 function replaceToDashes() {
