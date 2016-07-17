@@ -3,11 +3,11 @@ var artists = [
   {firstname:"Miles" ,
    lastname:"Davis"
   },
-  {firstname:"Chick Corea",
-  lastname:"Davis"
+  {firstname:"Chick",
+  lastname:"Corea"
   },
-  {firstname:"Herbie Hancock",
-  lastname:"Davis"
+  {firstname:"Herbie",
+  lastname:"Hancock"
   },
   {firstname:"Nina",
   lastname:"Simone"
@@ -32,34 +32,39 @@ var artists = [
   }
 ];
 
+//holds artists dashed values
 var guessArtist = {
-  dashes:[],
+  firstname:[],
+  lastname: [],
+  display: function(){
+    console.log(this.firstname + " "+this.lastname);
+  }
 }
 
 //access artists
 function getArtist(){
-  console.log(artists[0].firstname + " "+ artists[0].lastname);
-  selected = artists[0].firstname + " "+ artists[0].lastname;
+  console.log(artists[0].firstname +"   "+ artists[0].lastname);
+  selected = artists[0].firstname + artists[0].lastname;
   return selected.toUpperCase();
 }
 
-function convertArtist(){
-  var dashSpace = "_ ";
-  for (var i = 0; i < selected.length; i++){
-    console.log(dashSpace);
+//converts firstname to dash
+function convertFirst(){
+  var guessFirst = "_";
+  for (var i = 0; i < artists[0].firstname.length; i++){
+    guessArtist.firstname.push(guessFirst);
+    console.log (guessFirst);
   }
- console.log(selected);
 }
 
-
-//get the index for the space in between words
-function findSpace() {
-    var str = selected;
-    var found = str.indexOf(" ");
-    console.log(found);
+// converts firstname to dash
+function convertLast(){
+  var guessLast = "_";
+  for (var i = 0; i < artists[0].lastname.length; i++){
+    guessArtist.lastname.push(guessLast);
+    console.log (guessLast);
+  }
 }
-
-
 
 //replace artist name for dashes
 function replaceToDashes() {
@@ -69,12 +74,23 @@ function replaceToDashes() {
 }
 
 
+
+// //get the index for the space in between words
+// function findSpace() {
+//     var str = selected;
+//     var found = str.indexOf(" ");
+//     return found;
+//     // console.log(found);
+// }
+
+
 //matches letters
-function matchLetter(){
-    var str = "Miles Davis";
-    var res = str.match(/i/gi);
-    document.getElementById("demo").innerHTML = res;
-}
+// function matchLetter(){
+//     var str = selected;
+//     var res = str.match(/" "/gi);
+//
+//     console.log(res);
+// }
 
 
 
