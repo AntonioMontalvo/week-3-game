@@ -32,19 +32,68 @@ var artists = [
   }
 ];
 
+var guessArtist = {
+  dashes:[],
+}
+
+//access artists
 function getArtist(){
   console.log(artists[0].firstname + " "+ artists[0].lastname);
   selected = artists[0].firstname + " "+ artists[0].lastname;
-  return selected;
+  return selected.toUpperCase();
 }
+
 function convertArtist(){
-  var dash = "_";
+  var dashSpace = "_ ";
+  for (var i = 0; i < selected.length; i++){
+    console.log(dashSpace);
+  }
+ console.log(selected);
 }
 
 
-var guessArtist = {
-  dashes:[],
+//get the index for the space in between words
+function findSpace() {
+    var str = selected;
+    var found = str.indexOf(" ");
+    console.log(found);
+}
+
+
+
+//replace artist name for dashes
+function replaceToDashes() {
+    var str = selected;
+    var result = str.replace("Miles Davis", "_ _ _");
+    console.log(result);
+}
+
+
+//matches letters
+function matchLetter(){
+    var str = "Miles Davis";
+    var res = str.match(/i/gi);
+    document.getElementById("demo").innerHTML = res;
+}
+
+
+
+
+
+
+
+
+
+
+
+// function testSelected() {
+//     var str = selected;
+//     var pattern = new RegExp(" ");
+//     var result = pattern.test(str);
 //
-
-
-}
+//       if(result = true) {
+//         console.log("I am a space");
+//       } else {
+//         console.lof("I am not a space!")
+//       }
+//     }
