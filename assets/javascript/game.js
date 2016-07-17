@@ -36,6 +36,7 @@ var artists = [
 var guessArtist = {
   firstname:[],
   lastname: [],
+  userTypedLetter: [],
   display: function(){
     var targetP = document.getElementById("guess-text");
 	 targetP.innerHTML = this.firstname + " " + this.lastname;
@@ -45,9 +46,9 @@ var guessArtist = {
 
 //access artists
 function getArtist(){
-  console.log(artists[0].firstname +"   "+ artists[0].lastname);
-  selected = artists[0].firstname + artists[0].lastname;
-  return selected.toUpperCase();
+  selected = artists[0].firstname.toUpperCase() + artists[0].lastname.toUpperCase();
+  name1 = artists[0].firstname.toUpperCase();
+  name2 = artists[0].lastname.toUpperCase();
 }
 
 //converts firstname to dash
@@ -69,39 +70,44 @@ function convertLast(){
 }
 
 
-//replace artist name for dashes
-function replaceToDashes() {
+// get user key input
+document.onkeyup = function(event) {
+	// Determines which exact key was selected. Make it Uppercase
+	var guessKey = String.fromCharCode(event.keyCode).toUpperCase();
+  // prints letter to screen
+  document.getElementById("guess-text").innerHTML = guessKey;
+  //push letter to guessArtist
+  guessArtist.userTypedLetter.push(guessKey);
+}
+
+
+function searchLetter() {
     var str = selected;
-    var result = str.replace("Miles Davis", "_ _ _");
-    console.log(result);
+    var n = str.search(guessArtist.userTypedLetter[0]);
+
+    console.log (n);
+
 }
 
 
 
-// //get the index for the space in between words
-// function findSpace() {
+
+// //replace artist name for dashes
+// function replaceToDashes() {
 //     var str = selected;
-//     var found = str.indexOf(" ");
+//     var result = str.replace("Miles Davis", "_ _ _");
+//     console.log(result);
+// }
+
+
+//get the index for
+
+// function findLetter(guessKey) {
+//     var str = selected;
+//     var found = str.indexOf(guessKey);
 //     return found;
-//     // console.log(found);
+//     console.log(found);
 // }
-
-
-//matches letters
-// function matchLetter(){
-//     var str = selected;
-//     var res = str.match(/" "/gi);
-//
-//     console.log(res);
-// }
-
-
-
-
-
-
-
-
 
 
 
