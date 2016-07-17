@@ -40,7 +40,6 @@ var guessArtist = {
   display: function(){
     var targetP = document.getElementById("dashed-text");
 	 targetP.innerHTML = this.firstname + " " + this.lastname;
-   console.log(this.firstname + " "+this.lastname);
   }
 }
 
@@ -81,15 +80,31 @@ document.onkeyup = function(event) {
 }
 
 
+// get the index of the userTypedLetter in selected
+// if not available returns -1
 function searchLetter() {
-    var str = selected;
-    var n = str.search(guessArtist.userTypedLetter[0]);
+var str = selected;
+var indices = [];
+var negative = "";
+    for(var i = 0; i < str.length; i++) {
+        if (str[i] === guessArtist.userTypedLetter[0])
+        indices.push(i);}
+        if (str[i] !== guessArtist.userTypedLetter[0])
+        negative += "not found!"
+      
+        console.log(negative);
+        console.log(indices);
+    }
 
-    console.log (n);
 
-}
-
-
+    // //splice
+    // var fruits = ["Banana", "Orange", "Apple", "Mango"];
+    // document.getElementById("demo").innerHTML = fruits;
+    //
+    // function myFunction() {
+    //     fruits.splice(2, 0, "Lemon", "Kiwi");
+    //     document.getElementById("demo").innerHTML = fruits;
+    // }
 
 
 // //replace artist name for dashes
@@ -98,27 +113,3 @@ function searchLetter() {
 //     var result = str.replace("Miles Davis", "_ _ _");
 //     console.log(result);
 // }
-
-
-//get the index for
-
-// function findLetter(guessKey) {
-//     var str = selected;
-//     var found = str.indexOf(guessKey);
-//     return found;
-//     console.log(found);
-// }
-
-
-
-// function testSelected() {
-//     var str = selected;
-//     var pattern = new RegExp(" ");
-//     var result = pattern.test(str);
-//
-//       if(result = true) {
-//         console.log("I am a space");
-//       } else {
-//         console.lof("I am not a space!")
-//       }
-//     }
