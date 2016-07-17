@@ -1,4 +1,4 @@
-//create an array for the artists
+//Object stores an array artists-objects
 var artists = [
   {firstname:"Miles" ,
    lastname:"Davis"
@@ -32,13 +32,13 @@ var artists = [
   }
 ];
 
-//holds artists dashed values
+//object stores artists dashed values and userTypedLetter
 var guessArtist = {
   firstname:[],
   lastname: [],
   userTypedLetter: [],
   display: function(){
-    var targetP = document.getElementById("guess-text");
+    var targetP = document.getElementById("dashed-text");
 	 targetP.innerHTML = this.firstname + " " + this.lastname;
    console.log(this.firstname + " "+this.lastname);
   }
