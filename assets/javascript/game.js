@@ -1,4 +1,6 @@
-//Object stores an array artists-objects
+/////////////////////////////////////////////////////////
+//                      OBJECTS                        //
+/////////////////////////////////////////////////////////
 var artists = [
   {name:"Miles Davis"
   },
@@ -22,7 +24,7 @@ var artists = [
   }
 ];
 
-//object stores artists dashed values and userTypedLetter
+
 var guessArtist = {
   dashedName:[],
   userTypedLetter: [],
@@ -41,13 +43,12 @@ var guessArtist = {
      var k = this.matchedEmpty[0];
     this.dashedName[k] = " ";
     this.displayDashes();
-  },
-  // upGuessText: function(){
-  //
-  // }
+  }
 }
+/////////////////////////////////////////////////////////
+//                      FUNCTIONS                      //
+/////////////////////////////////////////////////////////
 
-//access artists
 function getArtist(){
   selected = artists[0]['name'].toUpperCase();
   convertName();
@@ -58,8 +59,8 @@ function displayArtist(){
   var targetP = document.getElementById("artist");
   targetP.innerHTML = artists[0]['name'];
 }
-//converts name to dash
-function convertName(){
+
+function convertName(){//converts name to dash
   var str = selected;
   var guessThisOne = "_";
   var empty = " ";
@@ -70,25 +71,41 @@ function convertName(){
     console.log (guessThisOne);
   }
 }
-
-// get user key input
+/////////////////////////////////////////////////////////
+//                      ON-KEY-UP                      //
+/////////////////////////////////////////////////////////
 document.onkeyup = function(event) {
-	// Determines which exact key was selected. Make it Uppercase
-	var guessKey = String.fromCharCode(event.keyCode).toUpperCase();
-  //push letter to guessArtist
-  guessArtist.userTypedLetter.push(guessKey);
-  guessArtist.displayTypedLetter();
-}
+  	// Determines which key was selected.
+  	var guessKey = String.fromCharCode(event.keyCode).toUpperCase();
 
+    guessArtist.userTypedLetter.push(guessKey);//stores letter
+    guessArtist.displayTypedLetter();//calls function
 
-// get the index of the userTypedLetter in selected
-function searchLetter() {
-var str = selected;
-    for(var i = 0; i < str.length; i++) {
-        if (str[i] === guessArtist.userTypedLetter[0])
-        guessArtist.matches.push(i);
+    function letterIndex() {// get and stores the matched letter index
+        for(var i = 0; i < selected.length; i++) {
+            if (selected[i] === guessKey)
+            guessArtist.matches.push(i);
+        }
+        console.log(guessArtist.matches);
     }
+      letterIndex();
+
+    //////this 2 functions find if a letter is in the artist/////
+    function artistHasLetter(artist, letter){
+      return artist.indexOf(letter) >= 0;//because if indexOf -1 there is no match
+    }
+    function getArtistLetterToScreen(letter){
+      if(artistHasLetter(selected, guessKey)){
+        console.log( guessKey + " is a matching letter");
+      } else {
+        console.log( guessKey + " is not the matching letter");
+      }
+    }
+      getArtistLetterToScreen(guessKey);
 }
+
+
+
 
 
 // //replace artist name for dashes
