@@ -8,20 +8,27 @@
 </head>
 
 <body>
-	<header class="main-nav">
-    <h1>HANG THE JAZZMAN</h1>
-  </header>
+	<div id="container">
+		<header class="main-nav">
+	    <h1>HANG THE JAZZMAN</h1>
+	  </header>
 
-    <div class="main-content">
-      <h1>Guess the Artist</h1>
-			<p id="guess-text"></p>
-    </div>
-      <p id="dashed-text"></p>
-    </div>
-		<div class="subhead">
-	<h2>Enter your letter. 10 attemps max!</h2>
+	    <div class="main-content">
+	      <h1>Guess the Artist</h1>
+				<button onclick="getArtist()">Show Artist</button></br>
+				<h3>Enter your letter. 10 attemps max!</h3>
+				<h2 id="artist"></h2>
+				<p id="guess-text"></p>
+	    </div>
+	      <p id="dashed-text"></p>
+
+				<h4>Letters Already Guessed</h4>
+				<p id="typed-text"></p>
+	    </div>
+			<div class="subhead">
+
+	</div>
 </div>
-
 <script src="assets/javascript/game.js"></script>
 
 </body>

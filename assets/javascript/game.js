@@ -1,110 +1,94 @@
 //Object stores an array artists-objects
 var artists = [
-  {firstname:"Miles" ,
-   lastname:"Davis"
+  {name:"Miles Davis"
   },
-  {firstname:"Chick",
-  lastname:"Corea"
+  {name:"ChickCorea"
   },
-  {firstname:"Herbie",
-  lastname:"Hancock"
+  {name:"Herbie Hancock"
   },
-  {firstname:"Nina",
-  lastname:"Simone"
+  {tname:"Nina Simone"
   },
-  {firstname:"Stan",
-  lastname:"Getz"
+  {name:"Stan Getz"
   },
-  {firstname:"Sarah",
-  lastname:"Vaughan"
+  {name:"Sarah Vaughan"
   },
-  {firstname:"Louis",
-  lastname:"Armstrong"
+  {name:"Louis Armstrong"
   },
-  {firstname:"Duke",
-  lastname:"Ellington"
+  {name:"Duke Ellington"
   },
-  {firstname:"John",
-  lastname:"Coltrane"
+  {name:"John Coltrane"
   },
-  {firstname:"Charlie",
-  lastname:"Parker"
+  {name:"Charlie Parker"
   }
 ];
 
 //object stores artists dashed values and userTypedLetter
 var guessArtist = {
-  firstname:[],
-  lastname: [],
+  dashedName:[],
   userTypedLetter: [],
-  display: function(){
+  matches:[],
+  matchedEmpty:[],
+  displayDashes: function(){
     var targetP = document.getElementById("dashed-text");
-	 targetP.innerHTML = this.firstname + " " + this.lastname;
-  }
+  	targetP.innerHTML = this.dashedName;
+  },
+
+  displayTypedLetter: function(){
+    var targetP = document.getElementById("typed-text");
+  	targetP.innerHTML = this.userTypedLetter;
+  },
+  upDateDashText: function(){
+     var k = this.matchedEmpty[0];
+    this.dashedName[k] = " ";
+    this.displayDashes();
+  },
+  // upGuessText: function(){
+  //
+  // }
 }
 
 //access artists
 function getArtist(){
-  selected = artists[0].firstname.toUpperCase() + artists[0].lastname.toUpperCase();
-  name1 = artists[0].firstname.toUpperCase();
-  name2 = artists[0].lastname.toUpperCase();
+  selected = artists[0]['name'].toUpperCase();
+  convertName();
+  guessArtist.upDateDashText();
 }
 
-//converts firstname to dash
-function convertFirst(){
-  var guessFirst = "_";
-  for (var i = 0; i < artists[0].firstname.length; i++){
-    guessArtist.firstname.push(guessFirst);
-    console.log (guessFirst);
+function displayArtist(){
+  var targetP = document.getElementById("artist");
+  targetP.innerHTML = artists[0]['name'];
+}
+//converts name to dash
+function convertName(){
+  var str = selected;
+  var guessThisOne = "_";
+  var empty = " ";
+  for (var i = 0; i < artists[0]['name'].length; i++){
+    if (str[i] === empty) {guessArtist.matchedEmpty.push(i);
+    }
+    guessArtist.dashedName.push(guessThisOne);
+    console.log (guessThisOne);
   }
 }
-
-// converts firstname to dash
-function convertLast(){
-  var guessLast = "_";
-  for (var i = 0; i < artists[0].lastname.length; i++){
-    guessArtist.lastname.push(guessLast);
-    console.log (guessLast);
-  }
-}
-
 
 // get user key input
 document.onkeyup = function(event) {
 	// Determines which exact key was selected. Make it Uppercase
 	var guessKey = String.fromCharCode(event.keyCode).toUpperCase();
-  // prints letter to screen
-  document.getElementById("guess-text").innerHTML = guessKey;
   //push letter to guessArtist
   guessArtist.userTypedLetter.push(guessKey);
+  guessArtist.displayTypedLetter();
 }
 
 
 // get the index of the userTypedLetter in selected
-// if not available returns -1
 function searchLetter() {
 var str = selected;
-var indices = [];
-var negative = "";
     for(var i = 0; i < str.length; i++) {
         if (str[i] === guessArtist.userTypedLetter[0])
-        indices.push(i);}
-        if (str[i] !== guessArtist.userTypedLetter[0])
-        negative += "not found!"
-      
-        console.log(negative);
-        console.log(indices);
+        guessArtist.matches.push(i);
     }
-
-
-    // //splice
-    // var fruits = ["Banana", "Orange", "Apple", "Mango"];
-    // document.getElementById("demo").innerHTML = fruits;
-    //
-    // function myFunction() {
-    //     fruits.splice(2, 0, "Lemon", "Kiwi");
-    //     document.getElementById("demo").innerHTML = fruits;
-    // }
+}
 
 
 // //replace artist name for dashes
