@@ -1,6 +1,8 @@
 /////////////////////////////////////////////////////////
 //                      OBJECTS                        //
 /////////////////////////////////////////////////////////
+
+
 var artists = [
   {name:"Miles Davis"
   },
@@ -40,7 +42,7 @@ var guessArtist = {
   	targetP.innerHTML = this.userTypedLetter;
   },
   upDateDashText: function(){
-     var k = this.matchedEmpty[0];
+    var k = this.matchedEmpty[0];
     this.dashedName[k] = " ";
     this.displayDashes();
   }
@@ -81,27 +83,37 @@ document.onkeyup = function(event) {
     guessArtist.userTypedLetter.push(guessKey);//stores letter
     guessArtist.displayTypedLetter();//calls function
 
+
     function letterIndex() {// get and stores the matched letter index
         for(var i = 0; i < selected.length; i++) {
             if (selected[i] === guessKey)
-            guessArtist.matches.push(i);
+            // guessArtist.matches.push(i);
+            guessArtist.dashedName[i] = guessKey;
         }
-        console.log(guessArtist.matches);
+
+        console.log( guessKey + " is a matching letter");
     }
       letterIndex();
+      guessArtist.displayDashes();
 
-    //////this 2 functions find if a letter is in the artist/////
-    function artistHasLetter(artist, letter){
-      return artist.indexOf(letter) >= 0;//because if indexOf -1 there is no match
-    }
-    function getArtistLetterToScreen(letter){
-      if(artistHasLetter(selected, guessKey)){
-        console.log( guessKey + " is a matching letter");
-      } else {
-        console.log( guessKey + " is not the matching letter");
-      }
-    }
-      getArtistLetterToScreen(guessKey);
+    // //////this 2 functions together find if a letter is in the artist/////
+    // function artistHasLetter(artist, letter){
+    //   return artist.indexOf(letter) >= 0;//because if indexOf -1 there is no match
+    // }
+    // function getArtistLetterToScreen(letter){
+    //   if(artistHasLetter(selected, guessKey)){
+    //
+    //     // guessArtist.displayDashes();
+    //     console.log( guessKey + " is a matching letter");
+    //   } else {
+    //     console.log( guessKey + " is not the matching letter");
+    //   }
+    // }
+    //   getArtistLetterToScreen(guessKey);
+
+
+
+
 }
 
 
