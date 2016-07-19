@@ -83,39 +83,32 @@ function convertName(){//converts name to dash
 function checkAttempts(){
   var targetH1 = document.getElementById("counter");
   targetH1.innerHTML = ("Number of attemps left: " + (30 - attempts));
-
-    if( attempts === 30 ){
+    if( attempts === 30 || arrayedName == primitive ){
       var guessArea = document.getElementById("dashed-text");
       guessArea.innerHTML = "You know nothing about Jazz!";
-      console.log("Ten Attempts");
+      guessArtist.upDateDashText();
+      guessArtist.userTypedLetter = [];
+      guessArtist.dashedName = [];
       attempts = 0;
+      countName++;
     }
   }
+
+
 /////////////////////////////////////////////////////////
 //                      ON-KEY-UP                      //
 /////////////////////////////////////////////////////////
 document.onkeyup = function(event) {
-     getArtistToArray();
-     if( countName === next ){
+  // Determines which key was selected.
+  var guessKey = String.fromCharCode(event.keyCode).toUpperCase();
+  attempts++;
+     if(countName === next){
        getArtist();
        next ++;
      }
-     if ( attempts == 29 ){
-       guessArtist.dashedName = [];
-       countName++;
-     }
-     if(arrayedName == primitive){
-       
-       console.log("hello!");
-     }
-
-  	// Determines which key was selected.
-  	var guessKey = String.fromCharCode(event.keyCode).toUpperCase();
-
+    getArtistToArray();
     guessArtist.userTypedLetter.push(guessKey);//stores letter
-
     guessArtist.displayTypedLetter();//calls function
-
 
     function letterIndex() {// get and stores the matched letter index
         for(var i = 0; i < selected.length; i++) {
@@ -123,8 +116,7 @@ document.onkeyup = function(event) {
             guessArtist.dashedName[i] = guessKey;
         }
     }
-      attempts++;
-      letterIndex();
-      guessArtist.displayDashes();
-      checkAttempts();
+    letterIndex();
+    guessArtist.displayDashes();
+    checkAttempts();
   }
