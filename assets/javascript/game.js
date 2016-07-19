@@ -1,12 +1,14 @@
+var attempts = 0;
+var countName = 0;
+var next = 0;
 /////////////////////////////////////////////////////////
 //                      OBJECTS                        //
 /////////////////////////////////////////////////////////
-var attemps = 0;
 
 var artists = [
   {name:"Miles Davis"
   },
-  {name:"ChickCorea"
+  {name:"Chick Corea"
   },
   {name:"Herbie Hancock"
   },
@@ -26,7 +28,6 @@ var artists = [
   }
 ];
 
-
 var guessArtist = {
   dashedName:[],
   userTypedLetter: [],
@@ -39,9 +40,10 @@ var guessArtist = {
   displayTypedLetter: function(){
     var targetP = document.getElementById("typed-text");
   	targetP.innerHTML = this.userTypedLetter;
+
   },
   upDateDashText: function(){
-    var k = this.matchedEmpty[0];
+    var k = this.matchedEmpty[next];
     this.dashedName[k] = " ";
     this.displayDashes();
   }
@@ -51,21 +53,27 @@ var guessArtist = {
 /////////////////////////////////////////////////////////
 
 function getArtist(){
-  selected = artists[0]['name'].toUpperCase();
+  selected = artists[countName]['name'].toUpperCase();
   convertName();
   guessArtist.upDateDashText();
 }
+function getArtistToArray(){
+  nameToArray = artists[countName]['name'].toUpperCase();
+  arrayedName = nameToArray.split("").toLocaleString();
+  primitive = guessArtist.dashedName.toLocaleString();
+}
+
 
 function displayArtist(){
   var targetP = document.getElementById("artist");
-  targetP.innerHTML = artists[0]['name'];
+  targetP.innerHTML = artists[countName]['name'];
 }
 
 function convertName(){//converts name to dash
   var str = selected;
   var guessThisOne = "_";
   var empty = " ";
-  for (var i = 0; i < artists[0]['name'].length; i++){
+  for (var i = 0; i < artists[countName]['name'].length; i++){
     if (str[i] === empty) {guessArtist.matchedEmpty.push(i);
     }
     guessArtist.dashedName.push(guessThisOne);
@@ -74,22 +82,38 @@ function convertName(){//converts name to dash
 
 function checkAttempts(){
   var targetH1 = document.getElementById("counter");
-  targetH1.innerHTML = ("Number of attemps left: " + (10 - attemps));
+  targetH1.innerHTML = ("Number of attemps left: " + (30 - attempts));
 
-    if(attemps === 10 ){
+    if( attempts === 30 ){
       var guessArea = document.getElementById("dashed-text");
       guessArea.innerHTML = "You know nothing about Jazz!";
       console.log("Ten Attempts");
+      attempts = 0;
     }
   }
 /////////////////////////////////////////////////////////
 //                      ON-KEY-UP                      //
 /////////////////////////////////////////////////////////
 document.onkeyup = function(event) {
+     getArtistToArray();
+     if( countName === next ){
+       getArtist();
+       next ++;
+     }
+     if ( attempts == 29 ){
+       guessArtist.dashedName = [];
+       countName++;
+     }
+     if(arrayedName == primitive){
+       
+       console.log("hello!");
+     }
+
   	// Determines which key was selected.
   	var guessKey = String.fromCharCode(event.keyCode).toUpperCase();
 
     guessArtist.userTypedLetter.push(guessKey);//stores letter
+
     guessArtist.displayTypedLetter();//calls function
 
 
@@ -99,7 +123,7 @@ document.onkeyup = function(event) {
             guessArtist.dashedName[i] = guessKey;
         }
     }
-      attemps++;
+      attempts++;
       letterIndex();
       guessArtist.displayDashes();
       checkAttempts();
