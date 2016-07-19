@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////
 //                      OBJECTS                        //
 /////////////////////////////////////////////////////////
-
+var attemps = 0;
 
 var artists = [
   {name:"Miles Davis"
@@ -30,7 +30,6 @@ var artists = [
 var guessArtist = {
   dashedName:[],
   userTypedLetter: [],
-  matches:[],
   matchedEmpty:[],
   displayDashes: function(){
     var targetP = document.getElementById("dashed-text");
@@ -70,9 +69,19 @@ function convertName(){//converts name to dash
     if (str[i] === empty) {guessArtist.matchedEmpty.push(i);
     }
     guessArtist.dashedName.push(guessThisOne);
-    console.log (guessThisOne);
   }
 }
+
+function checkAttempts(){
+  var targetH1 = document.getElementById("counter");
+  targetH1.innerHTML = ("Number of attemps left: " + (10 - attemps));
+
+    if(attemps === 10 ){
+      var guessArea = document.getElementById("dashed-text");
+      guessArea.innerHTML = "You know nothing about Jazz!";
+      console.log("Ten Attempts");
+    }
+  }
 /////////////////////////////////////////////////////////
 //                      ON-KEY-UP                      //
 /////////////////////////////////////////////////////////
@@ -87,42 +96,11 @@ document.onkeyup = function(event) {
     function letterIndex() {// get and stores the matched letter index
         for(var i = 0; i < selected.length; i++) {
             if (selected[i] === guessKey)
-            // guessArtist.matches.push(i);
             guessArtist.dashedName[i] = guessKey;
         }
-
-        console.log( guessKey + " is a matching letter");
     }
+      attemps++;
       letterIndex();
       guessArtist.displayDashes();
-
-    // //////this 2 functions together find if a letter is in the artist/////
-    // function artistHasLetter(artist, letter){
-    //   return artist.indexOf(letter) >= 0;//because if indexOf -1 there is no match
-    // }
-    // function getArtistLetterToScreen(letter){
-    //   if(artistHasLetter(selected, guessKey)){
-    //
-    //     // guessArtist.displayDashes();
-    //     console.log( guessKey + " is a matching letter");
-    //   } else {
-    //     console.log( guessKey + " is not the matching letter");
-    //   }
-    // }
-    //   getArtistLetterToScreen(guessKey);
-
-
-
-
-}
-
-
-
-
-
-// //replace artist name for dashes
-// function replaceToDashes() {
-//     var str = selected;
-//     var result = str.replace("Miles Davis", "_ _ _");
-//     console.log(result);
-// }
+      checkAttempts();
+  }
