@@ -12,7 +12,7 @@ var artists = [
   },
   {name:"Herbie Hancock"
   },
-  {tname:"Nina Simone"
+  {name:"Nina Simone"
   },
   {name:"Stan Getz"
   },
@@ -81,17 +81,28 @@ function convertName(){//converts name to dash
 }
 
 function checkAttempts(){
+  var guessArea = document.getElementById("looser");
+  var winner = document.getElementById("winner");
   var targetH1 = document.getElementById("counter");
   targetH1.innerHTML = ("Number of attemps left: " + (30 - attempts));
+
     if( attempts === 30 || arrayedName == primitive ){
-      var guessArea = document.getElementById("dashed-text");
-      guessArea.innerHTML = "You know nothing about Jazz!";
       guessArtist.upDateDashText();
       guessArtist.userTypedLetter = [];
       guessArtist.dashedName = [];
       attempts = 0;
       countName++;
     }
+    if( attempts === 29){
+      guessArea.innerHTML = "You know nothing about Jazz! Try another one.";
+    }else{
+      guessArea.innerHTML = "";
+    }
+    if(arrayedName == primitive){
+      winner.innerHTML = "Alright, Alright, Alright!, Try another one.";
+     }else{
+      winner.innerHTML = "";
+     }
   }
 
 
@@ -121,6 +132,7 @@ document.onkeyup = function(event) {
         }
     }
     letterIndex();
-    guessArtist.displayDashes();
     checkAttempts();
+    guessArtist.displayDashes();
+
   }
