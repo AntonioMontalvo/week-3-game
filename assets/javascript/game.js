@@ -1,4 +1,4 @@
-var attempts = 0;
+ var attempts = 0;
 var countName = 0;
 var next = 0;
 /////////////////////////////////////////////////////////
@@ -46,7 +46,7 @@ var guessArtist = {
     var k = this.matchedEmpty[next];
     this.dashedName[k] = " ";
     this.displayDashes();
-  }
+  },
 }
 /////////////////////////////////////////////////////////
 //                      FUNCTIONS                      //
@@ -107,7 +107,11 @@ document.onkeyup = function(event) {
        next ++;
      }
     getArtistToArray();
-    guessArtist.userTypedLetter.push(guessKey);//stores letter
+
+    if(guessArtist.userTypedLetter.includes(guessKey) === false){
+      guessArtist.userTypedLetter.push(guessKey);//stores letter
+    }
+
     guessArtist.displayTypedLetter();//calls function
 
     function letterIndex() {// get and stores the matched letter index
