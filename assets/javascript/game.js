@@ -139,7 +139,6 @@ function checkAttempts(){
   targetH1.innerHTML = ("Number of attemps left: " + (30 - attempts));
 
     if( attempts === 30 || arrayedName == primitive ){
-      addPicture();
       pauseTrack();
       guessArtist.upDateDashText();
       guessArtist.userTypedLetter = [];
@@ -147,12 +146,16 @@ function checkAttempts(){
       attempts = 0;
       countName++;
     }
+    if ( attempts === 8){
+      addPicture();
+    }
     if( attempts === 29){
       guessArea.innerHTML = "You know nothing about Jazz! Try another one.";
     }else{
       guessArea.innerHTML = "";
     }
     if(arrayedName == primitive){
+
       winner.innerHTML = "Alright, Alright, Alright!, Try another one.";
      }else{
       winner.innerHTML = "";
