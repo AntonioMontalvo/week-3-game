@@ -8,49 +8,64 @@ var next = 0;
 
 var artists = [
   {name:"Miles Davis",
-   track: 'assets/music/miles.mp3'
+   track: 'assets/music/miles.mp3',
+   photo: 'assets/images/miles.jpeg'
   },
   {name:"Chick Corea",
-  track: 'assets/music/chick.mp3'
+  track: 'assets/music/chick.mp3',
+  photo: 'assets/images/chick.jpeg'
   },
   {name:"Herbie Hancock",
-  track: 'assets/music/herbie.mp3'
+  track: 'assets/music/herbie.mp3',
+  photo: 'assets/images/herbie.jpeg'
   },
   {name:"Jaco Pastorius",
-  track: 'assets/music/jaco.mp3'
+  track: 'assets/music/jaco.mp3',
+  photo: 'assets/images/jaco.jpeg'
   },
   {name:"Stan Getz",
-  track: 'assets/music/stan.mp3'
+  track: 'assets/music/stan.mp3',
+  photo: 'assets/images/stan.jpeg'
   },
   {name:"Chet Baker",
-  track: 'assets/music/chet.mp3'
+  track: 'assets/music/chet.mp3',
+  photo: 'assets/images/chet.jpeg'
   },
   {name:"Dizzy Gillespie",
-  track: 'assets/music/dizzy.mp3'
+  track: 'assets/music/dizzy.mp3',
+  photo: 'assets/images/dizzy.jpeg'
   },
   {name:"Art Blakey",
-  track: 'assets/music/art.mp3'
+  track: 'assets/music/art.mp3',
+  photo: 'assets/images/art.jpg'
   },
   {name:"Louis Armstrong",
-  track: 'assets/music/louis.mp3'
+  track: 'assets/music/louis.mp3',
+  photo: 'assets/images/louis.jpeg'
   },
   {name:"John Coltrane",
-  track: 'assets/music/john.mp3'
+  track: 'assets/music/john.mp3',
+  photo: 'assets/images/john.jpeg'
   },
   {name:"Ella Fitzgerald",
-  track: 'assets/music/ella.mp3'
+  track: 'assets/music/ella.mp3',
+  photo: 'assets/images/ella.jpeg'
   },
   {name:"Count Basie",
-  track: 'assets/music/count.mp3'
+  track: 'assets/music/count.mp3',
+  photo: 'assets/images/count.jpeg'
   },
   {name:"Sarah Vaughan",
-  track: 'assets/music/sarah.mp3'
+  track: 'assets/music/sarah.mp3',
+  photo: 'assets/images/sarah.jpeg'
   },
   {name:"Astrud Gilberto",
-  track: 'assets/music/astrud.mp3'
+  track: 'assets/music/astrud.mp3',
+  photo: 'assets/images/astrud.jpg'
   },
   {name:"Billie Holiday",
-  track: 'assets/music/bille.mp3'
+  track: 'assets/music/bille.mp3',
+  photo: 'assets/images/billie.jpg'
   }
 ];
 
@@ -76,12 +91,7 @@ var guessArtist = {
 }
 /////////////////////////////////////////////////////////
 //                      FUNCTIONS                      //
-/////////////////////////////////////////////////////////
-// function backgroundMusic(){
-//   var audio = document.createElement('audio');
-//   audio.src = 'assets/music/chick.mp3';
-//   audio.play();
-// }
+//////////////////////////////////////////////////////
 var audio = document.createElement('audio');
 function playTrack(){
   audio.src = artists[countName].track;
@@ -91,12 +101,16 @@ function pauseTrack(){
   audio.src = artists[countName].track;
   audio.pause();
 }
+function addPicture(){
+  document.getElementById('artists-profile').src = artists[countName].photo;
+}
+
+
 function getArtist(){
   selected = artists[countName]['name'].toUpperCase();
   playTrack();
   convertName();
   guessArtist.upDateDashText();
-
 }
 
 function getArtistToArray(){
@@ -125,6 +139,7 @@ function checkAttempts(){
   targetH1.innerHTML = ("Number of attemps left: " + (30 - attempts));
 
     if( attempts === 30 || arrayedName == primitive ){
+      addPicture();
       pauseTrack();
       guessArtist.upDateDashText();
       guessArtist.userTypedLetter = [];
