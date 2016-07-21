@@ -1,30 +1,56 @@
- var attempts = 0;
+var attempts = 0;
 var countName = 0;
 var next = 0;
+// window.onload = backgroundMusic();
 /////////////////////////////////////////////////////////
 //                      OBJECTS                        //
 /////////////////////////////////////////////////////////
 
 var artists = [
-  {name:"Miles Davis"
+  {name:"Miles Davis",
+   track: 'assets/music/miles.mp3'
   },
-  {name:"Chick Corea"
+  {name:"Chick Corea",
+  track: 'assets/music/chick.mp3'
   },
-  {name:"Herbie Hancock"
+  {name:"Herbie Hancock",
+  track: 'assets/music/herbie.mp3'
   },
-  {name:"Nina Simone"
+  {name:"Jaco Pastorius",
+  track: 'assets/music/jaco.mp3'
   },
-  {name:"Stan Getz"
+  {name:"Stan Getz",
+  track: 'assets/music/stan.mp3'
   },
-  {name:"Sarah Vaughan"
+  {name:"Chet Baker",
+  track: 'assets/music/chet.mp3'
   },
-  {name:"Louis Armstrong"
+  {name:"Dizzy Gillespie",
+  track: 'assets/music/dizzy.mp3'
   },
-  {name:"Duke Ellington"
+  {name:"Art Blakey",
+  track: 'assets/music/art.mp3'
   },
-  {name:"John Coltrane"
+  {name:"Louis Armstrong",
+  track: 'assets/music/louis.mp3'
   },
-  {name:"Charlie Parker"
+  {name:"John Coltrane",
+  track: 'assets/music/john.mp3'
+  },
+  {name:"Ella Fitzgerald",
+  track: 'assets/music/ella.mp3'
+  },
+  {name:"Count Basie",
+  track: 'assets/music/count.mp3'
+  },
+  {name:"Sarah Vaughan",
+  track: 'assets/music/sarah.mp3'
+  },
+  {name:"Astrud Gilberto",
+  track: 'assets/music/astrud.mp3'
+  },
+  {name:"Billie Holiday",
+  track: 'assets/music/bille.mp3'
   }
 ];
 
@@ -51,24 +77,37 @@ var guessArtist = {
 /////////////////////////////////////////////////////////
 //                      FUNCTIONS                      //
 /////////////////////////////////////////////////////////
-
+// function backgroundMusic(){
+//   var audio = document.createElement('audio');
+//   audio.src = 'assets/music/chick.mp3';
+//   audio.play();
+// }
+var audio = document.createElement('audio');
+function playTrack(){
+  audio.src = artists[countName].track;
+  audio.play();
+}
+function pauseTrack(){
+  audio.src = artists[countName].track;
+  audio.pause();
+}
 function getArtist(){
   selected = artists[countName]['name'].toUpperCase();
+  playTrack();
   convertName();
   guessArtist.upDateDashText();
+
 }
+
 function getArtistToArray(){
   nameToArray = artists[countName]['name'].toUpperCase();
   arrayedName = nameToArray.split("").toLocaleString();
   primitive = guessArtist.dashedName.toLocaleString();
 }
-
-
 function displayArtist(){
   var targetP = document.getElementById("artist");
   targetP.innerHTML = artists[countName]['name'];
 }
-
 function convertName(){//converts name to dash
   var str = selected;
   var guessThisOne = "_";
@@ -79,7 +118,6 @@ function convertName(){//converts name to dash
     guessArtist.dashedName.push(guessThisOne);
   }
 }
-
 function checkAttempts(){
   var guessArea = document.getElementById("looser");
   var winner = document.getElementById("winner");
@@ -87,6 +125,7 @@ function checkAttempts(){
   targetH1.innerHTML = ("Number of attemps left: " + (30 - attempts));
 
     if( attempts === 30 || arrayedName == primitive ){
+      pauseTrack();
       guessArtist.upDateDashText();
       guessArtist.userTypedLetter = [];
       guessArtist.dashedName = [];
